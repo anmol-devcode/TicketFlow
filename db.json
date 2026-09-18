@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "id": "u1",
+            "name": "Ava Customer",
+            "email": "customer@ticketflow.dev",
+            "password": "password123",
+            "role": "customer"
+        },
+        {
+            "id": "u2",
+            "name": "Ravi Agent",
+            "email": "agent@ticketflow.dev",
+            "password": "password123",
+            "role": "agent"
+        },
+        {
+            "id": "u3",
+            "name": "Nora Admin",
+            "email": "admin@ticketflow.dev",
+            "password": "password123",
+            "role": "admin"
+        }
+    ],
+    "tickets": []
+}
