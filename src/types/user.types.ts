@@ -7,6 +7,6 @@ export interface User {
   role: UserRole;
 }
 
-export interface UserPassword extends User {
+export interface UserRecord extends User {
   password: string;
 }
