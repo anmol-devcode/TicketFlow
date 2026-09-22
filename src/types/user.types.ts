@@ -10,3 +10,8 @@ export interface User {
 export interface UserRecord extends User {
   password: string;
 }
+
+export interface AuthSession {
+  user: User | null;
+  token: string | null;
+}

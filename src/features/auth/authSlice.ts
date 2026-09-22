@@ -1,28 +1,47 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { User } from "../../types/user.types";
+import type { AuthSession } from "../../types/user.types";
 
-interface AuthState {
-  user: User | null;
+function loadSessionFromStorage(): AuthSession | null {
+  try {
+    const raw = localStorage.getItem("ticketflow_session");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 }
 
-const initialState: AuthState = {
-  user: null,
+const storedSession = loadSessionFromStorage();
+
+const initialState: AuthSession = {
+  user: storedSession?.user ?? null,
+  token: storedSession?.token ?? null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User>) {
-      state.user = action.payload;
+    sessionStarted(state, action: PayloadAction<AuthSession>) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      localStorage.setItem(
+        "ticketflow_session",
+        JSON.stringify(action.payload.user),
+      );
+      localStorage.setItem(
+        "ticketflow_token",
+        JSON.stringify(action.payload.token),
+      );
     },
 
-    logout(state) {
+    sessionEnded(state) {
       state.user = null;
+      state.token = null;
+      localStorage.removeItem("ticketflow_session");
+      localStorage.removeItem("ticketflow_token");
     },
   },
 });
 
-export const { setUser, logout } = authSlice.actions;
-
+export const { sessionStarted, sessionEnded } = authSlice.actions;
 export default authSlice.reducer;
