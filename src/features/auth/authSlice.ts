@@ -45,3 +45,8 @@ const authSlice = createSlice({
 
 export const { sessionStarted, sessionEnded } = authSlice.actions;
 export default authSlice.reducer;
+
+export const selectCurrentUser = (state: { auth: AuthSession }) =>
+  state.auth.user;
+export const selectIsAuthenticated = (state: { auth: AuthSession }) =>
+  Boolean(state.auth.token);
