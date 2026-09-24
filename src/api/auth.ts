@@ -23,7 +23,7 @@ export async function loginRequest({
 
 //signup function
 
-export async function SignupRequestBody({
+export async function SignupRequest({
   name,
   email,
   password,

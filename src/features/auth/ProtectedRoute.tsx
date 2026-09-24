@@ -15,14 +15,19 @@ function ProtectedRoutes({ childern, allowedRoles }: ProtectedRouteProps) {
   const location = useLocation();
 
   if(!isAuthenticated) {
+    return <Navigate to="/login" state={{from: location}} replace />;
     // Navigation -> login page .. navigate -> location
   }
 
   if (allowedRoles && user && !allowedRoles.includes(user.role)) {
+    return(
+      <Navigate to="/dashboard" replace/>
+
+    )
     // Navigateto -> Dashboard 
   }
 
   return childern;
 }
 
-export default ProtectedRoutes
+export default ProtectedRoutes;

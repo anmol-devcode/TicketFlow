@@ -1,5 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AuthSession } from "../../types/user.types";
+import type { AuthSession, User } from "../../types/user.types";
+
+ export interface AuthState{
+  user: User | null;
+  token: string | null;
+}
 
 function loadSessionFromStorage(): AuthSession | null {
   try {
@@ -12,7 +17,7 @@ function loadSessionFromStorage(): AuthSession | null {
 
 const storedSession = loadSessionFromStorage();
 
-const initialState: AuthSession = {
+const initialState: AuthState = {
   user: storedSession?.user ?? null,
   token: storedSession?.token ?? null,
 };
@@ -26,7 +31,7 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       localStorage.setItem(
         "ticketflow_session",
-        JSON.stringify(action.payload.user),
+        JSON.stringify(action.payload),
       );
       localStorage.setItem(
         "ticketflow_token",
@@ -46,7 +51,8 @@ const authSlice = createSlice({
 export const { sessionStarted, sessionEnded } = authSlice.actions;
 export default authSlice.reducer;
 
-export const selectCurrentUser = (state: { auth: AuthSession }) =>
+export const selectCurrentUser = (state: { auth: AuthState }) =>
   state.auth.user;
-export const selectIsAuthenticated = (state: { auth: AuthSession }) =>
+export const selectIsAuthenticated = (state: { auth: AuthState }) =>
   Boolean(state.auth.token);
+

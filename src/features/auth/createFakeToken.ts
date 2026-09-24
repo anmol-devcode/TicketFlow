@@ -14,3 +14,4 @@ export function createFakeToken(user: User): string {
   const payload = btoa(JSON.stringify(userObject));
   return `user.${payload}.token`;
 }
+
