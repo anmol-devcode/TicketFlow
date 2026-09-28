@@ -5,11 +5,11 @@ import { selectCurrentUser, selectIsAuthenticated } from "./authSlice";
 import type { UserRole } from "../../types/user.types";
 
 interface ProtectedRouteProps {
-  childern: ReactNode;
-  allowedRoles: UserRole[];
+  children: ReactNode;
+  allowedRoles?: UserRole[];
 }
 
-function ProtectedRoutes({ childern, allowedRoles }: ProtectedRouteProps) {
+function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
@@ -27,7 +27,7 @@ function ProtectedRoutes({ childern, allowedRoles }: ProtectedRouteProps) {
     // Navigateto -> Dashboard 
   }
 
-  return childern;
+  return children;
 }
 
-export default ProtectedRoutes;
+export default ProtectedRoute;

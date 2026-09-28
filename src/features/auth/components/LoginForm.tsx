@@ -40,14 +40,14 @@ function LoginForm() {
 
     try {
       const rawUser = await loginRequest(values);
-      
-    //   const { password, ...safeUser } = rawUser;
+
+      //   const { password, ...safeUser } = rawUser;
       const safeUser = {
-    id: rawUser.id,
-    name: rawUser.name,
-    email: rawUser.email,
-    role: rawUser.role,
-  };
+        id: rawUser.id,
+        name: rawUser.name,
+        email: rawUser.email,
+        role: rawUser.role,
+      };
 
       dispatch(
         sessionStarted({

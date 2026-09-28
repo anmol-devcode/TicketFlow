@@ -4,7 +4,7 @@ import {
   selectCurrentUser,
   selectIsAuthenticated,
   sessionEnded,
-} from "../../authSlice";
+} from "../../features/auth/authSlice";
 
 
 function RootLayout() {
